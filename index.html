@@ -4,26 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smash or Pass</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Smash or Pass</h1>
-            <p>Make your choice!</p>
-        </header>
-
-        <div id="image-container">
-            <img id="image" src="" alt="Person">
+        <h1>Smash or Pass</h1>
+        <div class="image-container">
+            <button id="prev-btn" class="nav-button">&lt;</button>
+            <img id="image" src="" alt="Image Display" />
+            <button id="next-btn" class="nav-button">&gt;</button>
         </div>
-
         <div class="buttons">
-            <button id="pass-btn" class="btn pass">Pass</button>
-            <button id="smash-btn" class="btn smash">Smash</button>
+            <button id="smash-btn">Smash</button>
+            <button id="pass-btn">Pass</button>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
