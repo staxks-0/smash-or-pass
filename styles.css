@@ -10,7 +10,8 @@ body {
 }
 
 .container {
-    max-width: 400px; /* Limit width for mobile experience */
+    max-width: 90%; /* Use 90% of the viewport width */
+    width: 400px; /* Set a fixed width for larger screens */
     text-align: center;
     padding: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -64,5 +65,11 @@ button:hover {
 
 button:focus {
     outline: none; /* Remove focus outline */
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #666;
 }
 
