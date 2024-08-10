@@ -86,28 +86,34 @@ const images = [
     'pics/image85.png'
 ];
 
-let currentImageIndex = 0;
+let usedImages = []; // Array to track used images
 
 function displayImage() {
-    const imageElement = document.getElementById('image');
-    imageElement.src = images[currentImageIndex];
-}
+    if (usedImages.length === images.length) {
+        alert("All images have been displayed!"); // Alert when all images have been shown
+        return;
+    }
 
-// Function to get a random image index
-function getRandomImageIndex() {
-    return Math.floor(Math.random() * images.length);
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * images.length);
+    } while (usedImages.includes(images[randomIndex])); // Ensure the image hasn't been used yet
+
+    const imageElement = document.getElementById('image');
+    imageElement.src = images[randomIndex];
+
+    usedImages.push(images[randomIndex]); // Mark this image as used
 }
 
 function handleDecision(decision) {
-    const image = images[currentImageIndex];
-    console.log(`You chose to ${decision} on image ${currentImageIndex + 1}`);
+    const image = document.getElementById('image').src;
+    console.log(`You chose to ${decision} on image ${image}`);
 
     let decisions = JSON.parse(localStorage.getItem('decisions')) || [];
     decisions.push({ image, decision, timestamp: new Date() });
     localStorage.setItem('decisions', JSON.stringify(decisions));
 
-    currentImageIndex = getRandomImageIndex(); // Get a new random image index
-    displayImage();
+    displayImage(); // Load a new random image
 }
 
 // Event listeners for buttons
@@ -116,4 +122,3 @@ document.getElementById('pass-btn').addEventListener('click', () => handleDecisi
 
 // Load the first image when the page loads
 window.onload = displayImage;
-
