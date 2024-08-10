@@ -1,63 +1,50 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
+const images = [
+    'pics/image1.jpg',
+    'pics/image2.jpg',
+    'pics/image3.jpg',
+    // ...
+    'pics/image85.jpg'
+];
 
 let currentImageIndex = 0;
-let imageRefs = [];
 
-// Fetch images from Firebase Storage
-async function loadImages() {
-    const listRef = storage.ref().child('images');
-    const res = await listRef.listAll();
-    imageRefs = res.items;
-    if (imageRefs.length > 0) {
-        displayImage();
-    } else {
-        alert('No images found!');
-    }
-}
-
-// Display the current image
+// Function to display the current image
 function displayImage() {
-    imageRefs[currentImageIndex].getDownloadURL().then((url) => {
-        document.getElementById('image').src = url;
-    });
+    const imageElement = document.getElementById('image');
+    imageElement.src = images[currentImageIndex];
 }
 
-// Handle Smash or Pass
+// Function to handle decision making
 function handleDecision(decision) {
-    const docRef = db.collection('decisions').doc();
-    docRef.set({
-        image: imageRefs[currentImageIndex].name,
-        decision: decision,
-        timestamp: new Date()
-    });
+    const image = images[currentImageIndex];
+    console.log(`You chose to ${decision} on image ${currentImageIndex + 1}`);
+
+    // Load existing data from local storage
+    let decisions = JSON.parse(localStorage.getItem('decisions')) || [];
+    
+    // Push the new decision to the decisions array
+    decisions.push({ image, decision, timestamp: new Date() });
+    localStorage.setItem('decisions', JSON.stringify(decisions));
+    
+    alert('Your decision has been recorded in local storage.');
+
     nextImage();
 }
 
-// Load the next image
+// Function to load the next image
 function nextImage() {
     currentImageIndex++;
-    if (currentImageIndex < imageRefs.length) {
+    if (currentImageIndex < images.length) {
         displayImage();
     } else {
         alert('No more images!');
     }
 }
 
+// Event listeners for buttons
 document.getElementById('smash-btn').addEventListener('click', () => handleDecision('smash'));
 document.getElementById('pass-btn').addEventListener('click', () => handleDecision('pass'));
 
-// Load images on page load
-window.onload = loadImages;
+// Load the first image when the page loads
+window.onload = displayImage;
+
