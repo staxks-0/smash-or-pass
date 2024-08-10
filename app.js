@@ -93,6 +93,11 @@ function displayImage() {
     imageElement.src = images[currentImageIndex];
 }
 
+// Function to get a random image index
+function getRandomImageIndex() {
+    return Math.floor(Math.random() * images.length);
+}
+
 function handleDecision(decision) {
     const image = images[currentImageIndex];
     console.log(`You chose to ${decision} on image ${currentImageIndex + 1}`);
@@ -101,30 +106,14 @@ function handleDecision(decision) {
     decisions.push({ image, decision, timestamp: new Date() });
     localStorage.setItem('decisions', JSON.stringify(decisions));
 
-    nextImage();
-}
-
-function nextImage() {
-    currentImageIndex++;
-    if (currentImageIndex >= images.length) {
-        currentImageIndex = 0; // Reset to the first image
-    }
-    displayImage();
-}
-
-function prevImage() {
-    currentImageIndex--;
-    if (currentImageIndex < 0) {
-        currentImageIndex = images.length - 1; // Loop back to the last image
-    }
+    currentImageIndex = getRandomImageIndex(); // Get a new random image index
     displayImage();
 }
 
 // Event listeners for buttons
 document.getElementById('smash-btn').addEventListener('click', () => handleDecision('smash'));
 document.getElementById('pass-btn').addEventListener('click', () => handleDecision('pass'));
-document.getElementById('next-btn').addEventListener('click', nextImage);
-document.getElementById('prev-btn').addEventListener('click', prevImage);
 
 // Load the first image when the page loads
 window.onload = displayImage;
+
