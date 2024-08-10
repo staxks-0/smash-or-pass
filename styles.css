@@ -10,54 +10,59 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 400px; /* Limit width for mobile experience */
     text-align: center;
     padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     background-color: white;
     border-radius: 10px;
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 1.8em;
     margin-bottom: 20px;
 }
 
 .image-container {
     position: relative;
     width: 100%;
-    height: 500px; /* Set a fixed height for the image display */
+    height: 400px; /* Height for the image display */
     overflow: hidden; /* Hide overflow */
+    border-radius: 10px; /* Round corners */
+    margin-bottom: 20px; /* Space below the image */
 }
 
 img {
     width: 100%; /* Make the image responsive */
     height: 100%; /* Maintain the height of the container */
     object-fit: cover; /* Cover the entire container without distorting */
-    border-radius: 10px;
     transition: transform 0.5s ease; /* Smooth transition for scaling */
 }
 
 .buttons {
-    margin-top: 20px;
     display: flex;
     justify-content: space-between; /* Space buttons evenly */
 }
 
 button {
-    padding: 10px 20px;
+    padding: 15px;
     font-size: 1.2em;
     color: white;
-    background-color: #007bff;
+    background-color: #ff5864; /* Tinder-like red color */
     border: none;
-    border-radius: 5px;
+    border-radius: 30px; /* Rounded buttons */
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     flex: 1; /* Allow buttons to take equal space */
-    margin: 0 10px; /* Space between buttons */
+    margin: 0 5px; /* Space between buttons */
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #ff4a50; /* Darker shade on hover */
     transform: scale(1.05); /* Slightly enlarge button on hover */
 }
+
+button:focus {
+    outline: none; /* Remove focus outline */
+}
+
