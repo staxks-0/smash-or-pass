@@ -112,9 +112,19 @@ function nextImage() {
     displayImage();
 }
 
+function prevImage() {
+    currentImageIndex--;
+    if (currentImageIndex < 0) {
+        currentImageIndex = images.length - 1; // Loop back to the last image
+    }
+    displayImage();
+}
+
 // Event listeners for buttons
 document.getElementById('smash-btn').addEventListener('click', () => handleDecision('smash'));
 document.getElementById('pass-btn').addEventListener('click', () => handleDecision('pass'));
+document.getElementById('next-btn').addEventListener('click', nextImage);
+document.getElementById('prev-btn').addEventListener('click', prevImage);
 
 // Load the first image when the page loads
 window.onload = displayImage;
